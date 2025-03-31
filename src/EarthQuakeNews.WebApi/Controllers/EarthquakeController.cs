@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EarthQuakeNews.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/earthquakes")]
     public class EarthquakeController : ControllerBase
     {
         [HttpGet]

@@ -20,12 +20,11 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowOrigin", policy =>
+    options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
+        policy.WithOrigins("*")
             .AllowAnyHeader()
-            .WithOrigins("*");
+            .AllowAnyMethod();
     });
 });
 
@@ -37,9 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowOrigin");
-
-//app.UseHttpsRedirection();
+app.UseCors();
 
 app.MapControllers();
 
