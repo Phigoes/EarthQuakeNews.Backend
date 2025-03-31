@@ -4,7 +4,7 @@ using EarthQuakeNews.Domain.ViewModel;
 
 namespace EarthQuakeNews.Domain.Entities
 {
-    public class Earthquake : Entity, IAuditable, ISoftDelete
+    public class Earthquake : Entity, IAuditable, ISoftDelete, IAggregateRoot
     {
         public Earthquake(double magnitude, string place, double latitude, double longitude, double kmDepth, DateTime earthquakeTime, string code, string url)
         {

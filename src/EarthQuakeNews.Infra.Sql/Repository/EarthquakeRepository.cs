@@ -1,22 +1,21 @@
-﻿using System.Collections.Immutable;
-using EarthQuakeNews.Domain.Interfaces.Repositories;
+﻿using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using EarthQuakeNews.Infra.Sql.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace EarthQuakeNews.Infra.Sql.Repository
 {
-    public class EarthquakeRepository : IEarthquakeRepository
+    public class EarthquakeRepository : GenericRepository<Earthquake>, IEarthquakeRepository
     {
-        private readonly IDbContextFactory<EarthQuakeNewsSqlContext> _dbContextFactory;
+        private readonly EarthQuakeNewsSqlContext _dbContext;
         private readonly IMemoryCache _memoryCache;
 
         private const string KEY_EARTHQUAKES = "Earthquakes";
 
-        public EarthquakeRepository(IDbContextFactory<EarthQuakeNewsSqlContext> dbContextFactory, IMemoryCache memoryCache)
+        public EarthquakeRepository(EarthQuakeNewsSqlContext dbContext, IMemoryCache memoryCache) : base(dbContext)
         {
-            _dbContextFactory = dbContextFactory;
+            _dbContext = dbContext;
             _memoryCache = memoryCache;
         }
 
@@ -27,8 +26,7 @@ namespace EarthQuakeNews.Infra.Sql.Repository
             if (earthquakesCache is not null)
                 return earthquakesCache;
 
-            await using var context = await _dbContextFactory.CreateDbContextAsync();
-            var earthquakes = await context.Earthquakes
+            var earthquakes = await _dbContext.Earthquakes
                 .AsNoTracking()
                 .OrderByDescending(e => e.Id)
                 .ToListAsync();
@@ -40,9 +38,8 @@ namespace EarthQuakeNews.Infra.Sql.Repository
 
         public async Task SaveListAsync(List<Earthquake> earthquakes)
         {
-            await using var context = await _dbContextFactory.CreateDbContextAsync();
-            context.Earthquakes.AddRange(earthquakes);
-            await context.SaveChangesAsync();
+            _dbContext.Earthquakes.AddRange(earthquakes);
+            await _dbContext.SaveChangesAsync();
 
             _memoryCache.Remove(KEY_EARTHQUAKES);
         }
