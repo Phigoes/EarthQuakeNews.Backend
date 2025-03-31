@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-EarthQuakeNews.Worker-f37aaaea-f9d0-4f0d-9ae9-f504fdea43e8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.InMemory" Version="1.0.0" />
+    <PackageReference Include="Hangfire.NetCore" Version="1.8.18" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EarthQuakeNews.Infra\EarthQuakeNews.Infra.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Job\EarthQuakeNews.Infra.Job.csproj" />
+  </ItemGroup>
+</Project>
