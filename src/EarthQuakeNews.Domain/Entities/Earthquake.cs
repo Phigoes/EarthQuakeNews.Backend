@@ -34,6 +34,7 @@ namespace EarthQuakeNews.Domain.Entities
         {
             return new EarthquakeInfoViewModel
             {
+                Id = Id,
                 Magnitude = Magnitude,
                 Place = Place,
                 Latitude = Math.Round(Latitude, 3),

@@ -2,6 +2,7 @@
 {
     public record EarthquakeInfoViewModel
     {
+        public double Id { get; set; }
         public double Magnitude { get; set; }
         public string Place { get; set; }
         public double Latitude { get; set; }
