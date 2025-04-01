@@ -14,8 +14,9 @@ namespace EarthQuakeNews.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? LastModifiedAt { get; set; }
 
-        public void Modified()
+        public void Update(int count)
         {
+            Count = count;
             LastModifiedAt = DateTime.UtcNow;
         }
     }

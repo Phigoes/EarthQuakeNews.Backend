@@ -11,7 +11,7 @@ namespace EarthQuakeNews.Infra.Sql.Context
         public EarthQuakeNewsSqlContext CreateDbContext(string[] args)
         {
             var configuration = CreateConfiguration();
-            var sqlServerConnectionString = configuration.GetSection("ConnectionStrings:SqlServer").Value;
+            var sqlServerConnectionString = configuration.GetSection("ConnectionString:SqlServer").Value;
 
             var optionsBuilder = new DbContextOptionsBuilder<EarthQuakeNewsSqlContext>();
             optionsBuilder.UseSqlServer(sqlServerConnectionString);

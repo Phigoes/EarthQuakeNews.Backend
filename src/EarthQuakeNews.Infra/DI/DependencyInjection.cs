@@ -37,12 +37,13 @@ namespace EarthQuakeNews.Infra.DI
                 client.BaseAddress = new Uri(rootSettings.USGSExternalService.Url);
             });
 
-            //Repositories
+            //SQL Server
             var sqlServerConnectionString = rootSettings.ConnectionString.SqlServer;
 
             services.AddDbContextFactory<EarthQuakeNewsSqlContext>(options =>
                 options.UseSqlServer(sqlServerConnectionString));
 
+            //Repositories
             services.AddScoped<IEarthquakeRepository, EarthquakeRepository>();
             services.AddScoped<IEarthquakeCountRepository, EarthquakeCountRepository>();
 

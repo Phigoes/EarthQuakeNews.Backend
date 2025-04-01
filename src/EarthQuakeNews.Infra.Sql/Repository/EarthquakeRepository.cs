@@ -31,7 +31,9 @@ namespace EarthQuakeNews.Infra.Sql.Repository
                 .OrderByDescending(e => e.Id)
                 .ToListAsync();
 
-            _memoryCache.Set(KEY_EARTHQUAKES, earthquakes);
+
+            if (earthquakes.Count > 0)
+                _memoryCache.Set(KEY_EARTHQUAKES, earthquakes);
 
             return earthquakes;
         }

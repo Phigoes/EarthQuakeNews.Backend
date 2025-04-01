@@ -39,8 +39,7 @@ namespace EarthQuakeNews.Infra.Sql.Repository
                 .AsNoTracking()
                 .FirstAsync(e => e.CreatedAt.Date == DateTime.UtcNow.Date);
 
-            earthquakeCountToday.Count = count;
-            earthquakeCountToday.Modified();
+            earthquakeCountToday.Update(count);
 
             context.EarthquakesCount.Update(earthquakeCountToday);
             await context.SaveChangesAsync();
