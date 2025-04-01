@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using EarthQuakeNews.Domain.Entities;
+using EarthQuakeNews.Domain.ValueObjects;
 
 namespace EarthQuakeNews.Domain.DTOs
 {
@@ -15,8 +16,8 @@ namespace EarthQuakeNews.Domain.DTOs
             return new Earthquake(
                 magnitude: Properties.Mag,
                 place: Properties.Place,
-                latitude: Geometry.Coordinates[1],
-                longitude: Geometry.Coordinates[0],
+                latitude: new Latitude(Geometry.Coordinates[1]),
+                longitude: new Longitude(Geometry.Coordinates[0]),
                 kmDepth: Geometry.Coordinates[2],
                 earthquakeTime: DateTimeOffset.FromUnixTimeMilliseconds(Properties.Time).UtcDateTime,
                 code: Properties.Code,

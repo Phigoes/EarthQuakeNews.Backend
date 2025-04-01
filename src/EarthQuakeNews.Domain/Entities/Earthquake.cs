@@ -1,12 +1,15 @@
 ﻿using EarthQuakeNews.Domain.Common.Base;
 using EarthQuakeNews.Domain.Common;
+using EarthQuakeNews.Domain.ValueObjects;
 using EarthQuakeNews.Domain.ViewModel;
 
 namespace EarthQuakeNews.Domain.Entities
 {
     public class Earthquake : Entity, IAuditable, ISoftDelete, IAggregateRoot
     {
-        public Earthquake(double magnitude, string place, double latitude, double longitude, double kmDepth, DateTime earthquakeTime, string code, string url)
+        public Earthquake() { }
+
+        public Earthquake(double magnitude, string place, Latitude latitude, Longitude longitude, double kmDepth, DateTime earthquakeTime, string code, string url)
         {
             Magnitude = magnitude;
             Place = place;
@@ -20,8 +23,8 @@ namespace EarthQuakeNews.Domain.Entities
 
         public double Magnitude { get; private set; }
         public string Place { get; private set; }
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
+        public Latitude Latitude { get; private set; }
+        public Longitude Longitude { get; private set; }
         public double KmDepth { get; private set; }
         public DateTime EarthquakeTime { get; private set; }
         public string Code { get; private set; }
@@ -37,8 +40,8 @@ namespace EarthQuakeNews.Domain.Entities
                 Id = Id,
                 Magnitude = Magnitude,
                 Place = Place,
-                Latitude = Math.Round(Latitude, 3),
-                Longitude = Math.Round(Longitude, 3),
+                Latitude = Math.Round(Latitude.Degree, 3),
+                Longitude = Math.Round(Longitude.Degree, 3),
                 KmDepth = KmDepth,
                 EarthquakeTime = EarthquakeTime,
                 Url = Url

@@ -20,15 +20,19 @@ namespace EarthQuakeNews.Infra.Sql.Mappings
                 .Property(e => e.Place)
                 .HasColumnType("varchar(100)");
 
-            builder
-                .Property(e => e.Latitude)
-                .HasColumnType("decimal")
-                .HasPrecision(8, 6);
+            builder.ComplexProperty(e => e.Latitude, latitudeBuilder =>
+            {
+                latitudeBuilder.Property(l => l.Degree)
+                    .HasColumnType("decimal")
+                    .HasPrecision(8, 6);
+            });
 
-            builder
-                .Property(e => e.Longitude)
-                .HasColumnType("decimal")
-                .HasPrecision(9, 6);
+            builder.ComplexProperty(e => e.Longitude, longitudeBuilder =>
+            {
+                longitudeBuilder.Property(l => l.Degree)
+                    .HasColumnType("decimal")
+                    .HasPrecision(9, 6);
+            });
 
             builder
                 .Property(e => e.KmDepth)
