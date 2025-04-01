@@ -1,4 +1,5 @@
 ﻿using EarthQuakeNews.Domain.Interfaces.Application;
+using EarthQuakeNews.Domain.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EarthQuakeNews.WebApi.Controllers
@@ -8,7 +9,8 @@ namespace EarthQuakeNews.WebApi.Controllers
     public class EarthquakeController : ControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType<IEnumerable<EarthquakeInfoViewModel>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetEarthquakeInfo([FromServices] IEarthquakeApp app)
         {
             var response = await app.GetEarthquakeData();
