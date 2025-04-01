@@ -49,7 +49,7 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (!earthquakeData.Any())
             {
-                _earthquakeRepository.AddRange(earthquakeDto.Select(e => e.ToEntity()).ToList());
+                await _earthquakeRepository.SaveListAsync(earthquakeDto.Select(e => e.ToEntity()).ToList());
             }
             else
             {
@@ -62,10 +62,8 @@ namespace EarthQuakeNews.Application.Earthquake
                     .Where(e => codeNotInDb.Contains(e.Properties.Code))
                     .ToList();
 
-                _earthquakeRepository.AddRange(newEarthquakes.Select(e => e.ToEntity()).ToList());
+                await _earthquakeRepository.SaveListAsync(newEarthquakes.Select(e => e.ToEntity()).ToList());
             }
-
-            await _earthquakeRepository.SaveAsync();
 
             earthquakeData = await _earthquakeRepository.GetEarthquakes();
             return earthquakeData
