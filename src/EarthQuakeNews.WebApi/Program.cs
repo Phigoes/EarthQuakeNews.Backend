@@ -1,5 +1,8 @@
 using EarthQuakeNews.Infra.DI;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +19,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDependencies();
-builder.Services.AddMemoryCache();
 
 builder.Services.AddCors(options =>
 {
@@ -39,5 +41,15 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 app.MapControllers();
+
+app.UseHealthChecks("/health", new HealthCheckOptions
+{
+    ResultStatusCodes =
+    {
+        [HealthStatus.Degraded] = 200
+    },
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

@@ -3,7 +3,7 @@
     public class RootSettings
     {
         public ConnectionString ConnectionString { get; set; }
-        public Hangfire Hangfire { get; set; }
+        public USGSExternalService USGSExternalService { get; set; }
     }
 
     public class ConnectionString
@@ -11,8 +11,10 @@
         public string SqlServer { get; set; }
     }
 
-    public class Hangfire
+    public class USGSExternalService
     {
-        public int IntervalHours { get; set; }
+        public string Url { get; set; }
+        public string Data { get; set; }
+        public string Count { get; set; }
     }
 }

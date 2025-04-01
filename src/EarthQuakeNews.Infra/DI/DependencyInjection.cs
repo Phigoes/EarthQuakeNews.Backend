@@ -10,6 +10,7 @@ using EarthQuakeNews.Infra.Sql.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace EarthQuakeNews.Infra.DI
 {
@@ -20,7 +21,9 @@ namespace EarthQuakeNews.Infra.DI
         public static IServiceCollection AddDependencies(this IServiceCollection services)
         {
             var configuration = CreateConfiguration();
-            var connectionStrings = configuration.GetSection("ConnectionStrings").Get<ConnectionString>();
+            services.Configure<RootSettings>(configuration);
+
+            var rootSettings = configuration.Get<RootSettings>();
 
             //Application
             services.AddScoped<IEarthquakeApp, EarthquakeApp>();
@@ -31,11 +34,11 @@ namespace EarthQuakeNews.Infra.DI
             //HttpClients
             services.AddHttpClient<EarthquakeUsgsClient>(client =>
             {
-                client.BaseAddress = new Uri("https://earthquake.usgs.gov/fdsnws/event/1/");
+                client.BaseAddress = new Uri(rootSettings.USGSExternalService.Url);
             });
 
             //Repositories
-            var sqlServerConnectionString = connectionStrings.SqlServer;
+            var sqlServerConnectionString = rootSettings.ConnectionString.SqlServer;
 
             services.AddDbContextFactory<EarthQuakeNewsSqlContext>(options =>
                 options.UseSqlServer(sqlServerConnectionString));
@@ -44,8 +47,18 @@ namespace EarthQuakeNews.Infra.DI
             services.AddScoped<IEarthquakeCountRepository, EarthquakeCountRepository>();
 
             //Cache
+            services.AddMemoryCache();
 
+            //HealthCheck
+            services.AddHealthChecks().AddSqlServer(
+                name: "SQL | EarthQuakeNews",
+                failureStatus: HealthStatus.Unhealthy,
+                connectionString: rootSettings.ConnectionString.SqlServer);
 
+            services.AddHealthChecks().AddUrlGroup(
+                name: "API | Earthquake USGS",
+                failureStatus: HealthStatus.Unhealthy,
+                uri: new Uri($"{rootSettings.USGSExternalService.Url}/count?format=geojson"));
 
             return services;
         }
