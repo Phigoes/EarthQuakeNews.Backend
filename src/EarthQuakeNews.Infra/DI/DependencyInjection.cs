@@ -4,6 +4,7 @@ using EarthQuakeNews.Domain.Interfaces.ExternalServices;
 using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Infra.ExternalServices;
 using EarthQuakeNews.Infra.HttpClients;
+using EarthQuakeNews.Infra.HttpClients.Interfaces;
 using EarthQuakeNews.Infra.Settings;
 using EarthQuakeNews.Infra.Sql.Context;
 using EarthQuakeNews.Infra.Sql.Repository;
@@ -32,9 +33,9 @@ namespace EarthQuakeNews.Infra.DI
             services.AddScoped<IEarthquakeUsgsExternalService, EarthquakeUsgsExternalService>();
 
             //HttpClients
-            services.AddHttpClient<EarthquakeUsgsClient>(client =>
+            services.AddHttpClient<IEarthquakeUsgsClient, EarthquakeUsgsClient>(client =>
             {
-                client.BaseAddress = new Uri(rootSettings.USGSExternalService.Url);
+                client.BaseAddress = new Uri(rootSettings.UsgsExternalService.Url);
             });
 
             //SQL Server
@@ -59,7 +60,7 @@ namespace EarthQuakeNews.Infra.DI
             services.AddHealthChecks().AddUrlGroup(
                 name: "API | Earthquake USGS",
                 failureStatus: HealthStatus.Unhealthy,
-                uri: new Uri($"{rootSettings.USGSExternalService.Url}/count?format=geojson"));
+                uri: new Uri($"{rootSettings.UsgsExternalService.Url}/count?format=geojson"));
 
             return services;
         }

@@ -2,16 +2,16 @@
 {
     public class RootSettings
     {
-        public ConnectionString ConnectionString { get; set; }
-        public USGSExternalService USGSExternalService { get; set; }
+        public ConnectionStringSettings ConnectionString { get; set; }
+        public USGSExternalServiceSettings UsgsExternalService { get; set; }
     }
 
-    public class ConnectionString
+    public class ConnectionStringSettings
     {
         public string SqlServer { get; set; }
     }
 
-    public class USGSExternalService
+    public class USGSExternalServiceSettings
     {
         public string Url { get; set; }
         public string Data { get; set; }

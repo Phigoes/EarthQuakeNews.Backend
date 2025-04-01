@@ -2,15 +2,15 @@
 using System.Text.Json.Nodes;
 using EarthQuakeNews.Domain.DTOs;
 using EarthQuakeNews.Domain.Interfaces.ExternalServices;
-using EarthQuakeNews.Infra.HttpClients;
+using EarthQuakeNews.Infra.HttpClients.Interfaces;
 
 namespace EarthQuakeNews.Infra.ExternalServices
 {
     public class EarthquakeUsgsExternalService : IEarthquakeUsgsExternalService
     {
-        private readonly EarthquakeUsgsClient _earthquakeUsgsClient;
+        private readonly IEarthquakeUsgsClient _earthquakeUsgsClient;
 
-        public EarthquakeUsgsExternalService(EarthquakeUsgsClient earthquakeUsgsClient)
+        public EarthquakeUsgsExternalService(IEarthquakeUsgsClient earthquakeUsgsClient)
         {
             _earthquakeUsgsClient = earthquakeUsgsClient;
         }
