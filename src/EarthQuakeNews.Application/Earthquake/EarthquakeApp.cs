@@ -3,6 +3,7 @@ using EarthQuakeNews.Domain.Interfaces.Application;
 using EarthQuakeNews.Domain.Interfaces.ExternalServices;
 using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Domain.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace EarthQuakeNews.Application.Earthquake
 {
@@ -11,14 +12,17 @@ namespace EarthQuakeNews.Application.Earthquake
         private readonly IEarthquakeUsgsExternalService _earthquakeUsgsExternalService;
         private readonly IEarthquakeRepository _earthquakeRepository;
         private readonly IEarthquakeCountRepository _earthquakeCountRepository;
+        private readonly ILogger<EarthquakeApp> _logger;
 
         public EarthquakeApp(IEarthquakeUsgsExternalService earthquakeUsgsExternalService,
             IEarthquakeRepository earthquakeRepository,
-            IEarthquakeCountRepository earthquakeCountRepository)
+            IEarthquakeCountRepository earthquakeCountRepository,
+            ILogger<EarthquakeApp> logger)
         {
             _earthquakeUsgsExternalService = earthquakeUsgsExternalService;
             _earthquakeRepository = earthquakeRepository;
             _earthquakeCountRepository = earthquakeCountRepository;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<EarthquakeInfoViewModel>> Execute()
@@ -28,16 +32,21 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (earthquakeCountTodayDatabase is null)
             {
+                _logger.LogInformation("Saving earthquake couting.");
                 await _earthquakeCountRepository.Save(new EarthquakeCount(earthquakeCountTodayExternalService));
             }
             else
             {
                 if (earthquakeCountTodayExternalService > earthquakeCountTodayDatabase.Count)
+                {
+                    _logger.LogInformation("Updating earthquake couting.");
                     await _earthquakeCountRepository.Update(earthquakeCountTodayExternalService);
+                }
             }
 
             if (earthquakeCountTodayExternalService == earthquakeCountTodayDatabase?.Count)
             {
+                _logger.LogInformation("Earthquake counting is the same as USGS Earthquake couting.");
                 var eartquakes = await _earthquakeRepository.GetEarthquakes();
                 return eartquakes
                     .Select(data => data.ToViewModel())
@@ -49,6 +58,7 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (!earthquakeData.Any())
             {
+                _logger.LogInformation("Saving earthquake data.");
                 await _earthquakeRepository.SaveListAsync(earthquakeDto.Select(e => e.ToEntity()).ToList());
             }
             else
@@ -59,8 +69,10 @@ namespace EarthQuakeNews.Application.Earthquake
                     .ToList();
 
                 var newEarthquakes = earthquakeDto
-                    .Where(e => codeNotInDb.Contains(e.Properties.Code))
+                    .Where(e => codeNotInDb.Contains(e.Properties.Code, StringComparer.OrdinalIgnoreCase))
                     .ToList();
+
+                _logger.LogInformation($"Saving {newEarthquakes.Count} new earthquake data.");
 
                 await _earthquakeRepository.SaveListAsync(newEarthquakes.Select(e => e.ToEntity()).ToList());
             }
