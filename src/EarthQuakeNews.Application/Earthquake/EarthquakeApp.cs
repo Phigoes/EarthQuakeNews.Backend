@@ -32,7 +32,7 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (earthquakeCountTodayDatabase is null)
             {
-                _logger.LogInformation("Saving earthquake couting.");
+                _logger.LogInformation("Saving earthquake counting.");
                 await _earthquakeCountRepository.Save(new EarthquakeCount(earthquakeCountTodayExternalService));
             }
             else
@@ -46,7 +46,7 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (earthquakeCountTodayExternalService == earthquakeCountTodayDatabase?.Count)
             {
-                _logger.LogInformation("Earthquake counting is the same as USGS Earthquake couting.");
+                _logger.LogInformation("Earthquake counting is the same as USGS Earthquake counting.");
                 var eartquakes = await _earthquakeRepository.GetEarthquakes();
                 return eartquakes
                     .Select(data => data.ToViewModel())
