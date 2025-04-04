@@ -40,7 +40,7 @@ namespace EarthQuakeNews.Infra.Sql.Mappings
                 .HasPrecision(7, 4);
 
             builder
-                .Property(e => e.Code)
+                .Property(e => e.FeatureId)
                 .HasColumnType("varchar(20)");
 
             builder

@@ -23,7 +23,7 @@ namespace EarthQuakeNews.Infra.Sql.Migrations
                     Longitude_Degree = table.Column<decimal>(type: "decimal(9,6)", precision: 9, scale: 6, nullable: false),
                     KmDepth = table.Column<decimal>(type: "decimal(7,4)", precision: 7, scale: 4, nullable: false),
                     EarthquakeTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Code = table.Column<string>(type: "varchar(20)", nullable: false),
+                    FeatureId = table.Column<string>(type: "varchar(20)", nullable: false),
                     Url = table.Column<string>(type: "varchar(100)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),

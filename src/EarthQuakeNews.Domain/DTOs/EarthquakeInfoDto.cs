@@ -10,6 +10,8 @@ namespace EarthQuakeNews.Domain.DTOs
         public Properties Properties { get; set; }
         [JsonPropertyName("geometry")]
         public Geometry Geometry { get; set; }
+        [JsonPropertyName("id")]
+        public string FeatureId { get; set; }
 
         public Earthquake ToEntity()
         {
@@ -20,7 +22,7 @@ namespace EarthQuakeNews.Domain.DTOs
                 longitude: new Longitude(Geometry.Coordinates[0]),
                 kmDepth: Geometry.Coordinates[2],
                 earthquakeTime: DateTimeOffset.FromUnixTimeMilliseconds(Properties.Time).UtcDateTime,
-                code: Properties.Code,
+                featureId: FeatureId,
                 url: Properties.Url);
         }
     }
@@ -35,8 +37,6 @@ namespace EarthQuakeNews.Domain.DTOs
         public long Time { get; set; }
         [JsonPropertyName("url")]
         public string Url { get; set; }
-        [JsonPropertyName("code")]
-        public string Code { get; set; }
     }
 
     public record Geometry

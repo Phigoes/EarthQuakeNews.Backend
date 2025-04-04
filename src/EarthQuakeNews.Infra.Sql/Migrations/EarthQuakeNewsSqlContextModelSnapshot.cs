@@ -31,10 +31,6 @@ namespace EarthQuakeNews.Infra.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -43,6 +39,10 @@ namespace EarthQuakeNews.Infra.Sql.Migrations
 
                     b.Property<DateTime>("EarthquakeTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FeatureId")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
 
                     b.Property<decimal>("KmDepth")
                         .HasPrecision(7, 4)

@@ -32,21 +32,21 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (earthquakeCountTodayDatabase is null)
             {
-                _logger.LogInformation("Saving earthquake counting.");
+                _logger.LogInformation("Saving initial earthquakes counting.");
                 await _earthquakeCountRepository.Save(new EarthquakeCount(earthquakeCountTodayExternalService));
             }
             else
             {
                 if (earthquakeCountTodayExternalService > earthquakeCountTodayDatabase.Count)
                 {
-                    _logger.LogInformation("Updating earthquake couting.");
+                    _logger.LogInformation("Updating earthquakes counting.");
                     await _earthquakeCountRepository.Update(earthquakeCountTodayExternalService);
                 }
             }
 
             if (earthquakeCountTodayExternalService == earthquakeCountTodayDatabase?.Count)
             {
-                _logger.LogInformation("Earthquake counting is the same as USGS Earthquake counting.");
+                _logger.LogInformation("Earthquakes counting is the same as USGS Earthquakes counting.");
                 var eartquakes = await _earthquakeRepository.GetEarthquakes();
                 return eartquakes
                     .Select(data => data.ToViewModel())
@@ -58,21 +58,21 @@ namespace EarthQuakeNews.Application.Earthquake
 
             if (!earthquakeData.Any())
             {
-                _logger.LogInformation("Saving earthquake data.");
+                _logger.LogInformation("Saving initial earthquakes data.");
                 await _earthquakeRepository.SaveListAsync(earthquakeDto.Select(e => e.ToEntity()).ToList());
             }
             else
             {
-                var codeNotInDb = earthquakeDto
-                    .Select(e => e.Properties.Code)
-                    .Except(earthquakeData.Select(d => d.Code))
+                var featureIdNotInDb = earthquakeDto
+                    .Select(e => e.FeatureId)
+                    .Except(earthquakeData.Select(d => d.FeatureId))
                     .ToList();
 
                 var newEarthquakes = earthquakeDto
-                    .Where(e => codeNotInDb.Contains(e.Properties.Code))
+                    .Where(e => featureIdNotInDb.Contains(e.FeatureId))
                     .ToList();
 
-                _logger.LogInformation($"Saving {newEarthquakes.Count} new earthquake data.");
+                _logger.LogInformation($"Saving {newEarthquakes.Count} new earthquake(s) data.");
 
                 await _earthquakeRepository.SaveListAsync(newEarthquakes.Select(e => e.ToEntity()).ToList());
             }

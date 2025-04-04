@@ -4,6 +4,7 @@ using EarthQuakeNews.Domain.Entities;
 using EarthQuakeNews.Domain.Interfaces.ExternalServices;
 using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Domain.ValueObjects;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace EarthQuakeNews.UnitTest.Application
@@ -14,13 +15,15 @@ namespace EarthQuakeNews.UnitTest.Application
         private readonly Mock<IEarthquakeUsgsExternalService> _earthquakeUsgsExternalServiceMock = new();
         private readonly Mock<IEarthquakeRepository> _earthquakeRepositoryMock = new();
         private readonly Mock<IEarthquakeCountRepository> _earthquakeCountRepositoryMock = new();
+        private readonly Mock<ILogger<EarthquakeApp>> _loggerMock = new();
 
         public EarthquakeAppTests()
         {
             _earthquakeApp = new EarthquakeApp(
                 _earthquakeUsgsExternalServiceMock.Object,
                 _earthquakeRepositoryMock.Object,
-                _earthquakeCountRepositoryMock.Object);
+                _earthquakeCountRepositoryMock.Object,
+                _loggerMock.Object);
         }
 
         [Fact]
@@ -158,13 +161,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.76,
                         Place = "10 km WNW of The Geysers, CA",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "nc75158552",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/nc75158552"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-122.865669, 38.806835, 1.3500]
-                    }
+                    },
+                    FeatureId = "nc75158552"
                 },
                 new EarthquakeInfoDto
                 {
@@ -173,13 +176,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.90,
                         Place = "35 km NNW of Beluga, Alaska",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "ak02546rfm3u",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/ak02546rfm3u"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-151.331000, 61.440900, 64.8000]
-                    }
+                    },
+                    FeatureId = "ak02546rfm3u"
                 },
                 new EarthquakeInfoDto
                 {
@@ -188,13 +191,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.76,
                         Place = "66 km NNE of Petersville, Alaska",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "ak02546r3kto",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/ak02546r3kto"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-150.342900, 63.061500, 105.5000]
-                    }
+                    },
+                    FeatureId = "ak02546r3kto"
                 }
             ];
         }
@@ -221,13 +224,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.76,
                         Place = "10 km WNW of The Geysers, CA",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "nc75158552",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/nc75158552"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-122.865669, 38.806835, 1.3500]
-                    }
+                    },
+                    FeatureId = "nc75158552"
                 },
                 new EarthquakeInfoDto
                 {
@@ -236,13 +239,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.90,
                         Place = "35 km NNW of Beluga, Alaska",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "ak02546rfm3u",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/ak02546rfm3u"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-151.331000, 61.440900, 64.8000]
-                    }
+                    },
+                    FeatureId = "ak02546rfm3u"
                 },
                 new EarthquakeInfoDto
                 {
@@ -251,13 +254,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 0.76,
                         Place = "66 km NNE of Petersville, Alaska",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "ak02546r3kto",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/ak02546r3kto"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-150.342900, 63.061500, 105.5000]
-                    }
+                    },
+                    FeatureId = "ak02546r3kto"
                 },
                 new EarthquakeInfoDto
                 {
@@ -266,13 +269,13 @@ namespace EarthQuakeNews.UnitTest.Application
                         Mag = 1.80,
                         Place = "30 km NW of Toyah, Texas",
                         Time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                        Code = "2025gjqh",
                         Url = "https://earthquake.usgs.gov/earthquakes/eventpage/2025gjqh"
                     },
                     Geometry = new Geometry
                     {
                         Coordinates = [-104.011000, 31.520000, 7.5867]
-                    }
+                    },
+                    FeatureId = "2025gjqh"
                 }
             ];
         }

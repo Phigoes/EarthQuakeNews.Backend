@@ -7,9 +7,9 @@ namespace EarthQuakeNews.Domain.Entities
 {
     public class Earthquake : Entity, IAuditable, ISoftDelete, IAggregateRoot
     {
-        public Earthquake() { }
+        private Earthquake() { }
 
-        public Earthquake(double magnitude, string place, Latitude latitude, Longitude longitude, double kmDepth, DateTime earthquakeTime, string code, string url)
+        public Earthquake(double magnitude, string place, Latitude latitude, Longitude longitude, double kmDepth, DateTime earthquakeTime, string featureId, string url)
         {
             Magnitude = magnitude;
             Place = place;
@@ -17,7 +17,7 @@ namespace EarthQuakeNews.Domain.Entities
             Longitude = longitude;
             KmDepth = kmDepth;
             EarthquakeTime = earthquakeTime;
-            Code = code;
+            FeatureId = featureId;
             Url = url;
         }
 
@@ -27,7 +27,7 @@ namespace EarthQuakeNews.Domain.Entities
         public Longitude Longitude { get; private set; }
         public double KmDepth { get; private set; }
         public DateTime EarthquakeTime { get; private set; }
-        public string Code { get; private set; }
+        public string FeatureId { get; private set; }
         public string Url { get; private set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? LastModifiedAt { get; set; }
