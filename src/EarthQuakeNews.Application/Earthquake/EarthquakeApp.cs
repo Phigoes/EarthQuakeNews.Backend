@@ -69,7 +69,7 @@ namespace EarthQuakeNews.Application.Earthquake
                     .ToList();
 
                 var newEarthquakes = earthquakeDto
-                    .Where(e => codeNotInDb.Contains(e.Properties.Code, StringComparer.OrdinalIgnoreCase))
+                    .Where(e => codeNotInDb.Contains(e.Properties.Code))
                     .ToList();
 
                 _logger.LogInformation($"Saving {newEarthquakes.Count} new earthquake data.");
