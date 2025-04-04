@@ -1,8 +1,8 @@
-﻿using EarthQuakeNews.Application.Earthquake;
+﻿using EarthQuakeNews.Application;
+using EarthQuakeNews.Application.Interfaces.ExternalServices;
+using EarthQuakeNews.Application.Interfaces.Repositories;
 using EarthQuakeNews.Domain.DTOs;
 using EarthQuakeNews.Domain.Entities;
-using EarthQuakeNews.Domain.Interfaces.ExternalServices;
-using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Moq;

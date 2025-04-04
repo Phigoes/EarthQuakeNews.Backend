@@ -1,4 +1,4 @@
-﻿namespace EarthQuakeNews.Domain.Interfaces.Repositories
+﻿namespace EarthQuakeNews.Application.Interfaces.Repositories
 {
     public interface IGenericRepository<T>
     {

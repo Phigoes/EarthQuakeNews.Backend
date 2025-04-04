@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EarthQuakeNews.Application\EarthQuakeNews.Application.csproj" />
-    <ProjectReference Include="..\EarthQuakeNews.Domain\EarthQuakeNews.Domain.csproj" />
     <ProjectReference Include="..\EarthQuakeNews.Infra.Sql\EarthQuakeNews.Infra.Sql.csproj" />
   </ItemGroup>
 

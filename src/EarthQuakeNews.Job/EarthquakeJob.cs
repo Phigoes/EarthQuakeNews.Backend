@@ -1,4 +1,4 @@
-﻿using EarthQuakeNews.Application.Earthquake;
+﻿using EarthQuakeNews.Application;
 using Hangfire;
 using Microsoft.Extensions.Hosting;
 

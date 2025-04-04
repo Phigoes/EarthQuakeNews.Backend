@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
+using EarthQuakeNews.Application.Interfaces.ExternalServices;
 using EarthQuakeNews.Domain.DTOs;
-using EarthQuakeNews.Domain.Interfaces.ExternalServices;
 using EarthQuakeNews.Infra.HttpClients.Interfaces;
 
 namespace EarthQuakeNews.Infra.ExternalServices

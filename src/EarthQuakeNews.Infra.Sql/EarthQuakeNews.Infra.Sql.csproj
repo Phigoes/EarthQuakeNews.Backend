@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EarthQuakeNews.Domain\EarthQuakeNews.Domain.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Application\EarthQuakeNews.Application.csproj" />
   </ItemGroup>
 
 </Project>

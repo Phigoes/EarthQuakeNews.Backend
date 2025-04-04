@@ -1,7 +1,7 @@
-﻿using EarthQuakeNews.Application.Earthquake;
+﻿using EarthQuakeNews.Application;
+using EarthQuakeNews.Application.Interfaces.ExternalServices;
+using EarthQuakeNews.Application.Interfaces.Repositories;
 using EarthQuakeNews.Domain.Interfaces.Application;
-using EarthQuakeNews.Domain.Interfaces.ExternalServices;
-using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Infra.ExternalServices;
 using EarthQuakeNews.Infra.HttpClients;
 using EarthQuakeNews.Infra.HttpClients.Interfaces;

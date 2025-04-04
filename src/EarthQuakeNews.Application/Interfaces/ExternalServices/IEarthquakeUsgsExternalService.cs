@@ -1,6 +1,6 @@
 ﻿using EarthQuakeNews.Domain.DTOs;
 
-namespace EarthQuakeNews.Domain.Interfaces.ExternalServices
+namespace EarthQuakeNews.Application.Interfaces.ExternalServices
 {
     public interface IEarthquakeUsgsExternalService
     {

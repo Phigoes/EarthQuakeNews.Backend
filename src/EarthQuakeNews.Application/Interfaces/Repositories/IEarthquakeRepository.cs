@@ -1,6 +1,6 @@
 ﻿using EarthQuakeNews.Domain.Entities;
 
-namespace EarthQuakeNews.Domain.Interfaces.Repositories
+namespace EarthQuakeNews.Application.Interfaces.Repositories
 {
     public interface IEarthquakeRepository : IGenericRepository<Earthquake>
     {

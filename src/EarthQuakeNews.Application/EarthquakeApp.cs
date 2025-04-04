@@ -1,11 +1,11 @@
-﻿using EarthQuakeNews.Domain.Entities;
+﻿using EarthQuakeNews.Application.Interfaces.ExternalServices;
+using EarthQuakeNews.Application.Interfaces.Repositories;
+using EarthQuakeNews.Domain.Entities;
 using EarthQuakeNews.Domain.Interfaces.Application;
-using EarthQuakeNews.Domain.Interfaces.ExternalServices;
-using EarthQuakeNews.Domain.Interfaces.Repositories;
 using EarthQuakeNews.Domain.ViewModel;
 using Microsoft.Extensions.Logging;
 
-namespace EarthQuakeNews.Application.Earthquake
+namespace EarthQuakeNews.Application
 {
     public class EarthquakeApp : IEarthquakeApp
     {

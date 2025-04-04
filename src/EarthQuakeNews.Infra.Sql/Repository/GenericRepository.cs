@@ -1,4 +1,4 @@
-﻿using EarthQuakeNews.Domain.Interfaces.Repositories;
+﻿using EarthQuakeNews.Application.Interfaces.Repositories;
 using EarthQuakeNews.Domain.Common.Base;
 using EarthQuakeNews.Infra.Sql.Context;
 using Microsoft.EntityFrameworkCore;
