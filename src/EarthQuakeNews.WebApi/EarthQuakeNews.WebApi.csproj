@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EarthQuakeNews.Infra.Sql\EarthQuakeNews.Infra.Sql.csproj" />
-    <ProjectReference Include="..\EarthQuakeNews.Infra\EarthQuakeNews.Infra.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Application\EarthQuakeNews.Application.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Infra.IoC\EarthQuakeNews.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

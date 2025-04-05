@@ -1,4 +1,4 @@
-using EarthQuakeNews.Infra.DI;
+using EarthQuakeNews.Infra.IoC.DI;
 using EarthQuakeNews.Infra.Job;
 using EarthQuakeNews.Infra.Settings;
 using Hangfire;

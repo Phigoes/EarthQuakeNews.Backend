@@ -1,9 +1,9 @@
-using EarthQuakeNews.Infra.DI;
+using EarthQuakeNews.Infra.IoC.DI;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
-using HealthChecks.UI.Client;
 using EarthQuakeNews.WebApi.ExceptionHandler;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 

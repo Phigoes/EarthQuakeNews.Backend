@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace EarthQuakeNews.Infra.DI
+namespace EarthQuakeNews.Infra.IoC.DI
 {
     public static class DependencyInjection
     {

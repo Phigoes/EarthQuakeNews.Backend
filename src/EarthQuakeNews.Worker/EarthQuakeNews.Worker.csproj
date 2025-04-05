@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EarthQuakeNews.Infra\EarthQuakeNews.Infra.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Application\EarthQuakeNews.Application.csproj" />
+    <ProjectReference Include="..\EarthQuakeNews.Infra.IoC\EarthQuakeNews.Infra.IoC.csproj" />
     <ProjectReference Include="..\EarthQuakeNews.Job\EarthQuakeNews.Infra.Job.csproj" />
   </ItemGroup>
 </Project>

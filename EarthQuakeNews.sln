@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5BC104AC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarthQuakeNews.UnitTest", "test\EarthQuakeNews.UnitTest\EarthQuakeNews.UnitTest.csproj", "{EA18102E-6799-4B8F-9371-B2F473DCAAE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarthQuakeNews.Infra.IoC", "src\EarthQuakeNews.Infra.IoC\EarthQuakeNews.Infra.IoC.csproj", "{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{EA18102E-6799-4B8F-9371-B2F473DCAAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA18102E-6799-4B8F-9371-B2F473DCAAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA18102E-6799-4B8F-9371-B2F473DCAAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{678D5A6D-BB02-4CC9-88D5-7EB80A11D9C0} = {093AA11F-05D5-4DB9-BB80-C49415C9A204}
 		{31EE2031-8C16-4AB3-9459-A5104F960727} = {093AA11F-05D5-4DB9-BB80-C49415C9A204}
 		{EA18102E-6799-4B8F-9371-B2F473DCAAE3} = {5BC104AC-034D-4327-A2F8-8C47EDF66F08}
+		{855C04AB-DEC3-4BAF-9132-14D2CC7B1EC1} = {093AA11F-05D5-4DB9-BB80-C49415C9A204}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1DD4F1B-511C-45D8-A17C-FE78D49E6FE7}
