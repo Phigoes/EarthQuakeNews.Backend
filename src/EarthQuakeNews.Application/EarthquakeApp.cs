@@ -63,7 +63,7 @@ namespace EarthQuakeNews.Application
             }
             else
             {
-                if (earthquakeCountTodayDatabase.Count == 0)
+                if (earthquakeCountTodayDatabase is null || earthquakeCountTodayDatabase.Count == 0)
                 {
                     _logger.LogInformation($"Saving {earthquakeDto.Length} new earthquake(s) data.");
 
