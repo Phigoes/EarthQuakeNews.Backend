@@ -63,6 +63,18 @@ namespace EarthQuakeNews.Application
             }
             else
             {
+                if (earthquakeCountTodayDatabase.Count == 0)
+                {
+                    _logger.LogInformation($"Saving {earthquakeDto.Length} new earthquake(s) data.");
+
+                    await _earthquakeRepository.SaveListAsync(earthquakeDto.Select(e => e.ToEntity()).ToList());
+
+                    earthquakeData = await _earthquakeRepository.GetEarthquakes();
+                    return earthquakeData
+                        .Select(data => data.ToViewModel())
+                        .OrderByDescending(data => data.EarthquakeTime);
+                }
+
                 var featureIdNotInDb = earthquakeDto
                     .Select(e => e.FeatureId)
                     .Except(earthquakeData.Select(d => d.FeatureId))
