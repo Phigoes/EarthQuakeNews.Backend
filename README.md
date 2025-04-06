@@ -1,7 +1,7 @@
 # Earthquake News
 
 ## Overview
-The Earthquake Monitoring Backend is a .NET-based solution designed to provide earthquake data via a Web API and process background jobs with a Worker Service. It follows Clean Architecture combined with Domain-Driven Design (DDD) and adheres to SOLID principles to ensure maintainability and scalability.
+The EarthquakeNews is a .NET-based solution designed to provide earthquake data via a Web API and process background jobs with a Worker Service. It follows Clean Architecture combined with Domain-Driven Design (DDD) and adheres to SOLID principles to ensure maintainability and scalability.
 
 ## Features
 - **WebAPI**: Provides earthquake data through RESTful endpoints.
@@ -71,8 +71,8 @@ Update-Database
 ### 4. Run the Application
 - Open the solution in **Visual Studio 2022**.
 - Set multiple startup projects:
-  - **EarthquakeMonitoring.WebApi**
-  - **EarthquakeMonitoring.Worker**
+  - **EarthquakeNews.WebApi**
+  - **EarthquakeNews.Worker**
 - Press **F5** to start the project.
 
 ## API Endpoints
