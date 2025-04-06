@@ -126,7 +126,7 @@ namespace EarthQuakeNews.UnitTest.Application
         public async Task Execute__HasSameCountData_MustReturnEarthquakeData()
         {
             _earthquakeRepositoryMock
-                .SetupSequence(e => e.GetEarthquakes())
+                .Setup(e => e.GetEarthquakes())
                 .ReturnsAsync(GetEartquakesFromDb());
             _earthquakeUsgsExternalServiceMock
                 .Setup(e => e.GetEarthquakeCountToday())
@@ -138,6 +138,60 @@ namespace EarthQuakeNews.UnitTest.Application
             var result = await _earthquakeApp.Execute();
 
             Assert.NotEmpty(result);
+        }
+
+        [Fact]
+        [Trait("App", "Earthquake")]
+        public async Task Execute__HasCountDataNull_MustSaveEarthquakesData()
+        {
+            _earthquakeRepositoryMock
+                .SetupSequence(e => e.GetEarthquakes())
+                .ReturnsAsync(GetEartquakesFromDb())
+                .ReturnsAsync(GetEartquakesFromDbNewData());
+            _earthquakeUsgsExternalServiceMock
+                .Setup(e => e.GetEarthquakeCountToday())
+                .ReturnsAsync(3);
+            _earthquakeCountRepositoryMock
+                .Setup(e => e.GetCountToday())
+                .ReturnsAsync((EarthquakeCount?)null);
+            _earthquakeUsgsExternalServiceMock
+                .Setup(e => e.GetEarthquakeToday())
+                .ReturnsAsync(GetEartquakesFromExternalServiceNewData());
+
+            var result = await _earthquakeApp.Execute();
+
+            Assert.NotEmpty(result);
+            Assert.Equal(4, result.Count());
+
+            _earthquakeCountRepositoryMock.Verify(e => e.Save(It.IsAny<EarthquakeCount>()), Times.Once);
+            _earthquakeRepositoryMock.Verify(e => e.SaveListAsync(It.IsAny<List<Earthquake>>()), Times.Once);
+        }
+
+        [Fact]
+        [Trait("App", "Earthquake")]
+        public async Task Execute__HasCountDataZero_MustSaveEarthquakesData()
+        {
+            _earthquakeRepositoryMock
+                .SetupSequence(e => e.GetEarthquakes())
+                .ReturnsAsync(GetEartquakesFromDb())
+                .ReturnsAsync(GetEartquakesFromDbNewData());
+            _earthquakeUsgsExternalServiceMock
+                .Setup(e => e.GetEarthquakeCountToday())
+                .ReturnsAsync(3);
+            _earthquakeCountRepositoryMock
+                .Setup(e => e.GetCountToday())
+                .ReturnsAsync(new EarthquakeCount(0));
+            _earthquakeUsgsExternalServiceMock
+                .Setup(e => e.GetEarthquakeToday())
+                .ReturnsAsync(GetEartquakesFromExternalServiceNewData());
+
+            var result = await _earthquakeApp.Execute();
+
+            Assert.NotEmpty(result);
+            Assert.Equal(4, result.Count());
+
+            _earthquakeCountRepositoryMock.Verify(e => e.Save(It.IsAny<EarthquakeCount>()), Times.Once);
+            _earthquakeRepositoryMock.Verify(e => e.SaveListAsync(It.IsAny<List<Earthquake>>()), Times.Once);
         }
 
         private static IEnumerable<Earthquake> GetEartquakesFromDb()

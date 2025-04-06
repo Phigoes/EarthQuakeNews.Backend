@@ -30,7 +30,7 @@ namespace EarthQuakeNews.Application
             var earthquakeCountTodayExternalService = await _earthquakeUsgsExternalService.GetEarthquakeCountToday();
             var earthquakeCountTodayDatabase = await _earthquakeCountRepository.GetCountToday();
 
-            if (earthquakeCountTodayDatabase is null)
+            if (earthquakeCountTodayDatabase is null || earthquakeCountTodayDatabase.Count == 0)
             {
                 _logger.LogInformation("Saving initial earthquakes counting.");
                 await _earthquakeCountRepository.Save(new EarthquakeCount(earthquakeCountTodayExternalService));
