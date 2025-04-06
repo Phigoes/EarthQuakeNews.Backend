@@ -1,4 +1,4 @@
-# Earthquake Monitoring Backend
+# Earthquake News
 
 ## Overview
 The Earthquake Monitoring Backend is a .NET-based solution designed to provide earthquake data via a Web API and process background jobs with a Worker Service. It follows Clean Architecture combined with Domain-Driven Design (DDD) and adheres to SOLID principles to ensure maintainability and scalability.
