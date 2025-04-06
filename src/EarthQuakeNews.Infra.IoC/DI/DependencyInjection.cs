@@ -48,9 +48,6 @@ namespace EarthQuakeNews.Infra.IoC.DI
             services.AddScoped<IEarthquakeRepository, EarthquakeRepository>();
             services.AddScoped<IEarthquakeCountRepository, EarthquakeCountRepository>();
 
-            //Cache
-            services.AddMemoryCache();
-
             //HealthCheck
             services.AddHealthChecks().AddSqlServer(
                 name: "SQL | EarthQuakeNews",
