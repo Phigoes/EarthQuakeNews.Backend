@@ -31,7 +31,7 @@ EarthQuakeNews.Backend/
 │   │-- EarthQuakeNews.Infra
 │   │-- EarthQuakeNews.Infra.IoC
 │   │-- EarthQuakeNews.Infra.Sql
-│   │-- EarthQuakeNews.Infra.Job
+│   │-- EarthQuakeNews.Job
 │   │-- EarthQuakeNews.WebApi
 │   │-- EarthQuakeNews.Worker
 │-- tests/
