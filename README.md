@@ -30,7 +30,6 @@ EarthQuakeNews.Backend/
 │   │-- EarthQuakeNews.Domain
 │   │-- EarthQuakeNews.Infra
 │   │-- EarthQuakeNews.Infra.IoC
-│   │-- EarthQuakeNews.Infra
 │   │-- EarthQuakeNews.Infra.Sql
 │   │-- EarthQuakeNews.Job
 │   │-- EarthQuakeNews.WebApi
