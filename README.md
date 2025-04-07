@@ -56,8 +56,8 @@ git clone https://github.com/Phigoes/EarthQuakeNews.Backend.git
 1. Open **appsettings.Development.json** in the EarthQuakeNews.WebApi and EarthQuakeNews.Worker projects.
 2. Update the **ConnectionString** section to point to your MSSQL instance:
 ```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER;Database=EarthquakeDB;User Id=YOUR_USER;Password=YOUR_PASSWORD;"
+"ConnectionString": {
+  "SqlServer": "Server=YOUR_SERVER;Database=EarthquakeDB;User Id=YOUR_USER;Password=YOUR_PASSWORD;"
 }
 ```
 
